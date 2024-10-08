@@ -783,53 +783,106 @@
               <div class="col-md-6">
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <h3>Call Me</h3>
+                  <p>
+                    <a href="tel:+905443340456" style="text-decoration: none; color: inherit;">+90 (544) 334 04 56</a>
+                  </p>
                 </div>
               </div><!-- End Info Item -->
-
+              
               <div class="col-md-6">
                 <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Send an email</h3>
-                  <p>yusufkayatr96@gmail.com</p>
+                  <p>
+                    <a href="mailto:yusufkayatr96@gmail.com" style="text-decoration: none; color: inherit;">yusufkayatr96@gmail.com</a>
+                  </p>
                 </div>
               </div><!-- End Info Item -->
+              
 
             </div>
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+            <form id="contact-form" action="https://formspree.io/f/mqakzwpw" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
               <div class="row gy-4">
-
+          
                 <div class="col-md-6">
                   <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
                 </div>
-
-                <div class="col-md-6 ">
+          
+                <div class="col-md-6">
                   <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
                 </div>
-
+          
                 <div class="col-md-12">
                   <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
                 </div>
-
+          
                 <div class="col-md-12">
                   <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
                 </div>
-
+          
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
+                  <div class="loading" style="display:none;">Loading</div>
+                  <div class="error-message" style="display:none; color:rgb(255, 137, 137);">There was an error sending your message.</div>
+                  <div class="sent-message" style="display:none; color:rgb(116, 253, 116);">Your message has been sent. Thank you!</div>
+          
                   <button type="submit">Send Message</button>
                 </div>
-
+          
               </div>
             </form>
-          </div><!-- End Contact Form -->
+          </div>
+          
+          <script>
+            document.getElementById('contact-form').addEventListener('submit', async function(event) {
+              event.preventDefault();
+              const form = event.target;
+              const loadingMessage = form.querySelector('.loading');
+              const errorMessage = form.querySelector('.error-message');
+              const sentMessage = form.querySelector('.sent-message');
+          
+              loadingMessage.style.display = 'block';
+              errorMessage.style.display = 'none';
+              sentMessage.style.display = 'none';
+          
+              const formData = new FormData(form);
+          
+              try {
+                const response = await fetch(form.action, {
+                  method: form.method,
+                  body: formData,
+                  headers: {
+                    'Accept': 'application/json'
+                  }
+                });
+          
+                loadingMessage.style.display = 'none';
+          
+                if (response.ok) {
+                  const json = await response.json();
+                  if (json.ok) {
+                    sentMessage.style.display = 'block';
+                    form.reset();
+                  } else {
+                    errorMessage.style.display = 'block';
+                  }
+                } else {
+                  errorMessage.textContent = 'There was an error sending your message.';
+                  errorMessage.style.display = 'block';
+                }
+              } catch (error) {
+                loadingMessage.style.display = 'none';
+                errorMessage.textContent = 'There was an error sending your message.';
+                errorMessage.style.display = 'block';
+              }
+            });
+
+            
+          </script>
+          
 
         </div>
 
@@ -853,14 +906,14 @@
         
       </div>
       <div class="copyright">
-        <span>Copyright</span> <strong class="px-1 sitename">Bocor</strong> <span>All Rights Reserved</span>
+        <span>Copyright</span> <strong class="px-1 sitename">Yusuf Kaya</strong> <span>All Rights Reserved</span>
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you've purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="https://yusufkaya.xyz/">Yusuf Kaya</a>
       </div>
     </div>
   </footer>
