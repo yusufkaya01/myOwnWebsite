@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./myOwnWebsite:/home/ubuntu/myOwnWebsite  # Bind mount for your website files
+    environment:
+      JENKINS_HOME: /var/jenkins_home
+
+    user: root  # Run as root to install AWS CLI and change permissions
+
+volumes:
+  jenkins_home:
