@@ -530,6 +530,17 @@ h6 {
   }
 }
 
+.text-container {
+  display: flex;
+  justify-content: space-between; /* Adjust space between text */
+  flex-direction: column; /* Stack paragraphs vertically */
+}
+
+.text-container p {
+  margin: 0; /* Remove default margin */
+  text-align: justify; /* Justify text alignment */
+}
+
 /*--------------------------------------------------------------
 # Global Footer
 --------------------------------------------------------------*/
